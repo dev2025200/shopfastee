@@ -1,0 +1,492 @@
+
+<!D
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ShopFast </title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #f8f9fa, #e0e7ff);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: linear-gradient(90deg, #0d47a1, #1976d2);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    }
+    header h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+    .cart-info {
+      margin-top: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #bbdefb;
+    }
+
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+    }
+    .product {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 15px rgba(25, 118, 210, 0.15);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .product:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px rgba(25, 118, 210, 0.3);
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 3px solid #1976d2;
+    }
+    .product-details {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-details h2 {
+      font-size: 1.4rem;
+      color: #0d47a1;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .product-details p {
+      flex-grow: 1;
+      color: #555;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+    .price {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #0d47a1;
+      margin-bottom: 15px;
+    }
+    button.add-to-cart {
+      background: linear-gradient(90deg, #1976d2, #0d47a1);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+    }
+    button.add-to-cart:hover {
+      background: linear-gradient(90deg, #0d47a1, #1976d2);
+      box-shadow: 0 6px 12px rgba(25, 118, 210, 0.5);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      background: linear-gradient(90deg, #0d47a1, #1976d2);
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: auto;
+      box-shadow: 0 -3px 6px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      .product-details h2 {
+        font-size: 1.1rem;
+      }
+      button.add-to-cart {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ShopFast</h1>
+    <div class="cart-info">
+      🛒 Produits dans le panier: <span id="cart-count">0</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="product" data-price="120">
+      <img src="casque.jpg" alt="Casque Audio" />
+      <div class="product-details">
+        <h2>Casque Audio</h2>
+        <p>Son clair, design moderne et confortable.</p>
+        <div class="price">120 DH</div>
+        <button class="add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+
+    <div class="product" data-price="80">
+      <img src="t-shirt .jpg" alt="T-shirt Gamer" />
+      <div class="product-details">
+        <h2>T-shirt Gamer</h2>
+        <p>Coton 100% confort, parfait pour les gamers.</p>
+        <div class="price">80 DH</div>
+        <button class="add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+
+    <div class="product" data-price="150">
+      <img src="casque.jpg" alt="Clavier RGB" />
+      <div class="product-details">
+        <h2>Clavier RGB</h2>
+        <div class="price">150 DH</div>
+        <button class="add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+
+    <div class="product" data-price="200">
+      <img src="souris.jpg" alt="Souris Gamer" />
+      <div class="product-details">
+        <h2>Souris Gamer</h2>
+        <p>Ergonomique et ultra-précise pour les jeux.</p>
+        <div class="price">200 DH</div>
+        <button class="add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+
+    <div class="product" data-price="300">
+      <img src="montre.jpg" alt="Montre Sport" />
+      <div class="product-details">
+        <h2>Montre Sport</h2>
+        <p>Suivi d’activité et design sportif élégant.</p>
+        <div class="price">300 DH</div>
+        <button class="add-to-cart">Ajouter au panier</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 ShopFast. Tous droits réservés.
+  </footer>
+
+  <script>
+    let cartCount = 0;
+    const cartCountEl = document.getElementById('cart-count');
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+      button.addEventListener('click', () => {
+        cartCount++;
+        cartCountEl.textContent = cartCount;
+      });
+    });
+  </script>
+</body>
+</html>
+
+<html lang=fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Checkout - ShopFast amélioré</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f6fc;
+    margin: 0; padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 10px;
+  }
+  .checkout-container {
+    background: white;
+    max-width: 480px;
+    width: 100%;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  h2 {
+    text-align: center;
+    color: #0d47a1;
+    margin-bottom: 25px;
+  }
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #444;
+  }
+  input[type="text"], input[type="email"], input[type="tel"], select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+    border: 1.8px solid #1976d2;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, select:focus {
+    border-color: #0d47a1;
+    outline: none;
+  }
+  .summary {
+    background: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    color: #0d47a1;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(90deg, #1976d2, #0d47a1);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: linear-gradient(90deg, #0d47a1, #1976d2);
+  }
+  .message {
+    margin-top: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: green;
+    display: none;
+  }
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: -15px;
+    margin-bottom: 15px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="checkout-container">
+  <h2>Checkout - Résumé de commande</h2>
+
+  <div class="summary" id="order-summary">
+    Panier vide.
+  </div>
+
+  <form id="checkout-form" novalidate>
+    <label for="name">Nom complet</label>
+    <input type="text" id="name" name="name" placeholder="Votre nom" required />
+    <div class="error" id="error-name">Veuillez entrer votre nom complet.</div>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="exemple@mail.com" required />
+    <div class="error" id="error-email">Veuillez entrer un email valide.</div>
+
+    <label for="phone">Téléphone</label>
+    <input type="tel" id="phone" name="phone" placeholder="+212 6 XX XX XX XX" required pattern="^\+?\d{6,15}$" />
+    <div class="error" id="error-phone">Veuillez entrer un numéro de téléphone valide.</div>
+
+    <label for="payment">Mode de paiement</label>
+    <select id="payment" name="payment" required>
+      <option value="">-- Choisissez une option --</option>
+      <option value="carte">Carte bancaire</option>
+      <option value="livraison">Paiement à la livraison</option>
+      <option value="paypal">PayPal</option>
+    </select>
+    <div class="error" id="error-payment">Veuillez choisir un mode de paiement.</div>
+
+    <button type="submit">Valider la commande</button>
+  </form>
+
+  <div class="message" id="success-message"></div>
+</div>
+
+<script>
+  const cartItems = [
+    { nom: "Casque Audio", prix: 120, quantite: 1 },
+    { nom: "T-shirt Gamer", prix: 80, quantite: 2 },
+    { nom: "Clavier RGB", prix: 150, quantite: 1 }
+  ];
+
+  const orderSummaryEl = document.getElementById('order-summary');
+  const form = document.getElementById('checkout-form');
+  const successMessage = document.getElementById('success-message');
+
+  const errors = {
+    name: document.getElementById('error-name'),
+    email: document.getElementById('error-email'),
+    phone: document.getElementById('error-phone'),
+    payment: document.getElementById('error-payment'),
+  };
+
+  function calculTotal() {
+    return cartItems.reduce((total, item) => total + item.prix * item.quantite, 0);
+  }
+
+  function afficherRésumé() {
+    if(cartItems.length === 0) {
+      orderSummaryEl.textContent = "Panier vide.";
+      return;
+    }
+    let html = '';
+    cartItems.forEach(item => {
+      html += ${item.quantite} × ${item.nom} = ${item.prix * item.quantite} DH<br>;
+    });
+    html += <hr><strong>Total: ${calculTotal()} DH</strong>;
+    orderSummaryEl.innerHTML = html;
+  }
+
+  function validateEmail(email) {
+     
+    return /\S+@\S+\.\S+/.test(email);
+  }
+
+  function validatePhone(phone) {
+    // رقم هاتف بسيط (6-15 رقم)
+    return /^\+?\d{6,15}$/.test(phone);
+  }
+
+  function validateForm() {
+    let valid = true;
+
+    // اسم
+    if (!form.name.value.trim()) {
+      errors.name.style.display = 'block';
+      valid = false;
+    } else {
+      errors.name.style.display = 'none';
+    }
+
+    // إيميل
+    if (!validateEmail(form.email.value.trim())) {
+      errors.email.style.display = 'block';
+      valid = false;
+    } else {
+      errors.email.style.display = 'none';
+    }
+
+    // هاتف
+    if (!validatePhone(form.phone.value.trim())) {
+      errors.phone.style.display = 'block';
+      valid = false;
+    } else {
+      errors.phone.style.display = 'none';
+    }
+
+    // طريقة الدفع
+    if (!form.payment.value) {
+      errors.payment.style.display = 'block';
+      valid = false;
+    } else {
+      errors.payment.style.display = 'none';
+    }
+
+    return valid;
+  }
+
+  afficherRésumé();
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      successMessage.style.display = 'none';
+      return;
+    }
+
+    // Données à envoyer
+const data = {
+  nom: form.name.value.trim(),
+  email: form.email.value.trim(),
+  telephone: form.phone.value.trim(),
+  paiement: form.payment.value,
+  panier: cartItems,
+  total: calculTotal()
+};
+
+// Envoi au serveur
+fetch('https://ton-serveur.com/api/commande', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (!response.ok) {
+    throw new Error('Erreur lors de l’envoi des données');
+  }
+  return response.json();
+})
+.then(result => {
+  // Succès : on masque le formulaire et on affiche le message
+  form.style.display = 'none';
+
+  const modePaiement = form.payment.options[form.payment.selectedIndex].text;
+
+  successMessage.innerHTML = `
+    Merci pour votre commande, <strong>${form.name.value}</strong>! 🎉<br>
+    Mode de paiement choisi: <strong>${modePaiement}</strong><br>
+    Montant total: <strong>${calculTotal()} DH</strong><br>
+    Nous vous contacterons bientôt.
+  `;
+  successMessage.style.display = 'block';
+})
+.catch(error => {
+  alert('Une erreur est survenue : ' + error.message);
+});
+    
+
+    
+
+    const modePaiement = form.payment.options[form.payment.selectedIndex].text;
+
+    successMessage.innerHTML = `
+      Merci pour votre commande, <strong>${form.name.value}</strong>! 🎉<br>
+      Mode de paiement choisi: <strong>${modePaiement}</strong><br>
+      Montant total: <strong>${calculTotal()} DH</strong><br>
+      Nous vous contacterons bientôt.
+    `;
+    successMessage.style.display = 'block';
+  });
+</script>
+
+</body>
+</html>
